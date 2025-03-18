@@ -1,0 +1,49 @@
+class Solution {
+  public:
+  
+  struct compare {
+    bool operator()(Node* a, Node* b) {
+        return a->data > b->data; // Min-heap (smallest value at the top)
+    }
+};
+
+    Node* mergeKLists(vector<Node*>& arr) {
+        // Your code here
+        priority_queue<Node*, vector<Node*>, compare> minheap;
+
+        int k = arr.size();
+        if(k==0){
+            return NULL;
+        }
+        
+        for(int i = 0;i<k;i++){
+            if(arr[i] != NULL){
+                minheap.push(arr[i]);
+            }
+        }
+        
+        Node* head = NULL;
+        Node* tail = NULL;
+
+        while(minheap.size()> 0){
+            Node* temp = minheap.top();
+            minheap.pop();
+            
+            if (temp->next != NULL) {
+                minheap.push(temp->next);
+            }
+
+            if(head == NULL){
+                head=temp;
+                tail=temp;
+                
+                
+            }
+            else{
+                tail->next = temp;
+                tail=temp;
+            }
+        }
+        return head;
+    }
+};
