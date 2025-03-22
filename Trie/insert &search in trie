@@ -1,0 +1,74 @@
+#include<iostream>
+using namespace std;
+class trienode{
+    public:
+    char data;
+    trienode* children[26];
+    bool isterminal;
+    
+    trienode(char ch){
+        data=ch;
+        for(int i =0;i<26;i++){
+            children[i]==NULL;
+        }
+        isterminal=false;
+    }
+};
+
+class trie{
+    public:
+    
+    trienode* root;
+    
+    trie(){
+        root = new trienode('\0');
+    }
+    
+    void insertu(trienode* root,string word){
+        if(word.length()==0){
+            root->isterminal=true;
+            return;
+    }
+    int index= word[0]- 'A';
+    trienode* child;
+    if(root->children[index] != NULL){
+        child=root->children[index];
+    }
+    else{
+        child=new trienode(word[0]);
+        root->children[index]= child;
+    }
+    insertu(child,word.substr(1));
+    }
+    void insert(string word){
+        insertu(root,word);
+    }
+    bool searchu(trienode* root,string word){
+        if(word.length()==0){
+            return root->isterminal;
+        }
+        int index= word[0]- 'A';
+    trienode* child;
+    if(root->children[index] != NULL){
+        child=root->children[index];
+    }
+    else{
+        return false;
+    }
+    return searchu(child,word.substr(1));
+    }    
+    bool search(string word){
+        return searchu(root,word);
+    }
+};
+int main(){
+    
+    trie *t = new trie();
+    t->insert("abcd");
+    t->insert("adrk");
+    t->insert("lassan");
+    t->insert("loda");
+    cout<<"present or not"<<t->search("loda")<<endl;
+    
+    return 0;
+}
