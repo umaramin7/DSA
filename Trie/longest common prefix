@@ -11,7 +11,7 @@ class Solution {
             
             for(int j=i;j<n;j++){
                 if(arr[j].size()<i || ch != arr[j][i]){
-                    match=false;
+                    match=false ;
                     break;
                 }
                 
