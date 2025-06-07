@@ -17,7 +17,7 @@ class Solution{
       }
   }
     vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
-        //merge two array 
+        // merge two array 
         vector<int> ans;
         for( auto i: a){
             ans.push_back(i);
